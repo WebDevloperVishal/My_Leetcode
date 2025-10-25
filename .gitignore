@@ -146,4 +146,3 @@ dist
 # Custom addition to exclude package-lock.json
 package-lock.json
 /src/generated/prisma
-/src/generated/prisma
