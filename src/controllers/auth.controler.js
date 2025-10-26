@@ -4,7 +4,6 @@ import bcrypt from "bcryptjs";
 import {db} from "../lib/db.js";
 import { UserRole } from "../generated/prisma/index.js";
 
-
 export const register = async (req , res)=>{
     const { email, password, name } = req.body;
 
