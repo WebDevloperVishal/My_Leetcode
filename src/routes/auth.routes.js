@@ -14,7 +14,6 @@ router.post("/login" , login)
 router.post("/logout" , logout)
 
 // 4. check
-
 router.get("/check" , checkAuth)
 
 // router.get("/get-submissions" , authenticate , getSubmissions)
