@@ -1,20 +1,20 @@
 import express from "express"; 
 import dotenv from "dotenv";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 
 import authRouter from "./routes/auth.routes.js";
                                                                                                                                                                                                                                                                                                                                                                                        
-dotenv.config();
+dotenv.config({ path: {debug: true} });
 
 const app = express();
 
-const port = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 // Middlewares
 app.use(express.json());
-
 app.use(morgan("dev"));
-
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
     res.json({ 
@@ -23,8 +23,8 @@ app.get('/', (req, res) => {
     })
 })
 
-app.use("api/v1/auth" , authRouter);
+app.use("/api/v1/auth" , authRouter);
 
-app.listen(port, () =>{ 
-    console.log(`Example app listening at http://localhost:${port}`)
+app.listen(PORT, () =>{ 
+    console.log(`Example app listening at http://localhost:${PORT}`)
 })
