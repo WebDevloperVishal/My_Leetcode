@@ -21,6 +21,35 @@ model User {
   role     UserRole @default(USER)
   password String
 
+  Problems Problem[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Problem {
+  id          String     @id @default(cuid())
+  title       String
+  description String
+  difficulty  Difficulty
+
+  tags        String[]
+  examples    Json
+  constraints String
+  hints       String?
+  editorial   String?
+
+  testCases          Json
+  codeSnippets       Json
+  referenceSolutions Json
+
+userId String
+  user User @relation(fields: [userId], references: [id] , onDelete: Cascade)
+
 }
