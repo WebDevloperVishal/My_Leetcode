@@ -1,13 +1,34 @@
-import {db} from"../lib/db.js";
+import { db } from "../lib/db.js";
 
-export const createProblem = async (req, res) =>{};
+export const createProblem = async (req, res) => {
+    const {
+        title,
+        description,
+        difficulty,
+        tags,
+        examples,
+        constraints,
+        testCases,
+        codeSnippets,
+        referenceSolutions,
+        hints,
+        editorial
+    } = req.body;
 
-export const getAllProblem = async (req,res) =>{};
+    try {
+        
+    } catch (error) {
+        
+    }
+};
 
-export const getProblemById = async (req,res) =>{};
 
-export const updateProblem = async (req,res) =>{};
+export const getAllProblem = async (req, res) => { };
 
-export const deleteProblem = async (req,res) =>{};
+export const getProblemById = async (req, res) => { };
 
-export const getAllProblemSolvedByUser = async (req,res) =>{};
+export const updateProblem = async (req, res) => { };
+
+export const deleteProblem = async (req, res) => { };
+
+export const getAllProblemSolvedByUser = async (req, res) => { };
