@@ -1,6 +1,7 @@
 import { db } from "../lib/db.js";
 import {
   getJudge0LanguageId,
+  //  getJudge0Result,
   pollBatchResults,
   submitBatch,
 } from "../lib/judge0.js";
@@ -84,7 +85,28 @@ export const createProblem = async (req, res) => {
   }
 };
 
-export const getAllProblem = async (req, res) => { };
+export const getAllProblems = async (req, res) => {
+  try {
+    // Get all the problem and also check that this is solved by current user or not
+    const problems = await db.problem.findMany({
+      include: {
+        solvedBy:{
+          where: {
+            userId: req.user.id,
+          },
+        },
+      },
+    });
+    res.status(200).json({
+      success: true,
+      message: 'Problems fetched successfully',
+      problems,
+    });
+  } catch (error) {
+    console.error('Error fetching problems:', error);
+    res.status(500).json({ error: 'Failed to fetch problems' });
+  }
+};
 
 export const getProblemById = async (req, res) => { };
 

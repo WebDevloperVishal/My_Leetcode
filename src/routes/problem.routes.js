@@ -3,7 +3,7 @@ import { authenticate, checkAdmin } from "../middlewares/auth.middleware.js";
 import {
     createProblem,
     deleteProblem,
-    getAllProblem,
+    getAllProblems,
     getAllProblemSolvedByUser,
     getProblemById,
     updateProblem
@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post("/create-problem", authenticate, checkAdmin, createProblem);
 
-router.get("/get-all-problems", authenticate, getAllProblem);
+router.get("/get-all-problems", authenticate, getAllProblems);
 
 router.get("/get-problem/:id", getProblemById);
 
