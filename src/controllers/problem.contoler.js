@@ -1,5 +1,5 @@
 import { db } from "../lib/db.js";
-import { getJudge0LanguageId } from "../lib/judge0.js";
+import { getJudge0LanguageId, submitBatch } from "../lib/judge0.js";
 
 export const createProblem = async (req, res) => {
     const {
@@ -34,7 +34,12 @@ export const createProblem = async (req, res) => {
                 expected_output: output,
             }))
 
-            
+            const submissionResults = await submitBatch(submission);
+
+            const tokens = submissionResults.map((res)=>res.token);
+
+            const result = await pullBatchResults(token);
+
         }
     } catch (error) {
 

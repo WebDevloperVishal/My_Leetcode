@@ -24,4 +24,5 @@ export async function submitBatch(submissions) {
     }
   );
 
+  return data;
 }
