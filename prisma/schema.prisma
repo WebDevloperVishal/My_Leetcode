@@ -21,8 +21,8 @@ model User {
   role     UserRole @default(USER)
   password String
 
-  Problems Problem[]
-  submissions Submission[]
+  Problems       Problem[]
+  submissions    Submission[]
   solvedProblems ProblemSolved[]
 
   createdAt DateTime @default(now())
@@ -51,65 +51,61 @@ model Problem {
   codeSnippets       Json
   referenceSolutions Json
 
-userId String
-  user User @relation(fields: [userId], references: [id] , onDelete: Cascade)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-submissions Submission[]
-solvedBy ProblemSolved[]
-
+  submissions Submission[]
+  solvedBy    ProblemSolved[]
 }
 
-model Submission{
-  id String @id @default(cuid())
-  userId String
-  problem String
-  sourceCode Json
-  stdin String?
-  stdout String?
-  stderr String?
+model Submission {
+  id            String   @id @default(cuid())
+  userId        String
+  problemId     String
+  sourceCode    Json
+  stdin         String?
+  stdout        String?
+  stderr        String?
   compileOutput String?
-  memory String?
-  time String?
-  createdAt DateTime @default(now())
+  memory        String?
+  time          String?
+  status        String?
+  createdAt     DateTime @default(now())
 
   //relation
-  user  User @relation(fields: [userId] , references: [id] , onDelete: Cascade)
-  problem Problem @relation(fields: [problemId] , references: [id] , onDelete: Cascade)
-  testCases  TestCaseResult[]
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  problem   Problem          @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  testCases TestCaseResult[]
 
   @@index([status])
 }
 
-model testCaseResult {
-  id String @id @default(cuid())
-  submissionId String
-  testCases Int
-  passed Boolean
-  stdout String?
-  expected String?
-  stderr String?
+model TestCaseResult {
+  id            String  @id @default(cuid())
+  submissionId  String
+  testCases     Int
+  passed        Boolean
+  stdout        String?
+  expected      String?
+  stderr        String?
   compileOutput String?
-  compileOutput String?
-  status String?
-  memory String?
-  time String?
+  status        String?
+  memory        String?
+  time          String?
 
   createdAt DateTime @default(now())
 
-  submissions Submission @relation(fields: [submissionId] , references: [id] , onDelete: Cascade)
-  
+  submissions Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 }
 
 model ProblemSolved {
-  id String @id @default(cuid())
-  userId String
+  id        String   @id @default(cuid())
+  userId    String
   problemId String
   createdAt DateTime @default(now())
 
-  user User @relation(fields: [userId] , references: [id] , onDelete: Cascade)
-  problem Problem @relation(fields: [problemId] , references: [id] , onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
-
-  @@unique([userId , problemId])
-
+  @@unique([userId, problemId])
 }
