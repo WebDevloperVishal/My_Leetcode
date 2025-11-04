@@ -23,22 +23,22 @@ export const executeCode = async (req, res) => {
             wait: false,
         }))
 
-        const  submitResponse = await submitBatch(submissions);
+        const submitResponse = await submitBatch(submissions);
 
-        const token = submitResponse.map((res)=>res.token);
+        const token = submitResponse.map((res) => res.token);
 
         const result = await pollBatchResults(token);
 
         let allPassed = true;
-        const detailedResult = result.map((result , i)=>{
+        const detailedResults = result.map((result, i) => {
             const stdout = result.stdin?.trim() || null
             const expected_output = expected_outputs[i]?.trim();
-            
+
             const passed = stdout === expected_output
 
-            if(!passed) allPassed = false;
+            if (!passed) allPassed = false;
 
-            return{
+            return {
                 testCase: i + 1,
                 passed,
                 stdout,
@@ -54,13 +54,39 @@ export const executeCode = async (req, res) => {
         })
 
         const submission = await db.submission.create({
-            data:{
+            data: {
                 userId,
                 problemId,
-                source_Code:source_code,
-                langage:getLanguageName(language_id)
+                source_Code: source_code,
+                langage: getLanguageName(language_id),
+                stdin: stdin.join("/n"),
+                stdout: JSON.stringify(detailedResults.map((r) => r.stdout)),
+                stdree: detailedResults.some((r) => r.stdree)
+                    ? JSON.stringify(detailedResults.map((r) => r.stdree))
+                    : null,
+                compile_Output: detailedResults.some((r) => r.compile_output)
+                    ? JSON.stringify(detailedResults.map((r) => r.compile_output))
+                    : null,
+                status: allPassed ? "Accepted" : "Wrong Answer",
+                memory: detailedResults.some((r) => r.memory)
+                    ? JSON.stringify(detailedResults.map((r) => r.memory))
+                    : null,
+                time: detailedResults.some((r) => r.time)
+                    ? JSON.stringify(detailedResults.map((r) => r.time))
+                    : null,
             }
         })
+
+        if (allPassed) {
+            await db.problemSolved.upsert({
+                where: {
+                    userId_problemId: { userId, problemId }
+                },
+                update: {},
+                create: { userId, problemId }
+
+            })
+        }
 
     } catch (error) {
 
