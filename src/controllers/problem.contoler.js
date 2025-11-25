@@ -168,6 +168,8 @@ export const updateProblem = async (req, res) => {
       expected_output: output,
     }));
 
+    console.log("submissions:", submissions)
+
 
     
   }
