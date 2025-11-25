@@ -90,7 +90,7 @@ export const getAllProblems = async (req, res) => {
     // Get all the problem and also check that this is solved by current user or not
     const problems = await db.problem.findMany({
       include: {
-        solvedBy:{
+        solvedBy: {
           where: {
             userId: req.user.id,
           },
@@ -129,9 +129,58 @@ export const getProblemById = async (req, res) => {
 
 export const updateProblem = async (req, res) => {
 
-  
+  try {
+
+    const { id } = req.body;
+
+    const {
+      title,
+      description,
+      difficulty,
+      tags,
+      examples,
+      constraints,
+      testCases,
+      codeSnippets,
+      referenceSolutions
+    } = req.body;
+
+    const problem = await db.problem.findUnique({ where: { id } });
+
+    if (!problem) {
+      return res.status(404).json({ error: "problem was not found" });
+    }
+
+    if (req.user.role !== "ADMIN") {
+      return res.status(404).json({ error : "Only Admin can update problems"});
+    }
+
+
+    for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
+      const languageId = getJudge0LanguageId(language);
+      if(!languageId) { return res.status(400). json({ error: "Unsupporetd language: ${language}"});
+    }
+
+    const submissions = testCases.map(({input, output}) => ({
+      source_code: solutionCode,
+      languageId: languageId,
+      stdin: input,
+      expected_output: output,
+    }));
+
+
+    
+  }
+
+
+
+
+  } catch (error) {
+
+  }
+
 };
 
-export const deleteProblem = async (req, res) => {};
+export const deleteProblem = async (req, res) => { };
 
-export const getAllProblemSolvedByUser = async (req, res) => {};
+export const getAllProblemSolvedByUser = async (req, res) => { };
