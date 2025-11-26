@@ -131,7 +131,7 @@ export const updateProblem = async (req, res) => {
 
   try {
 
-    const { id } = req.body;
+    const { id } = req.params;
 
     const {
       title,
