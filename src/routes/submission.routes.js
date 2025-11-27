@@ -1,1 +1,3 @@
-import { db } from "../lib/db.js";
+import express from "express";
+import { authenticate } from "../middlewares/auth.middleware.js";
+ 
