@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.get("/get-all-submission" , authenticate, getAllSubmissions);
 
-router.get("/get-submissions/:id", authenticate, getAllSubmissionsFroProblem);
+router.get("/get-submissions/:problemid", authenticate, getAllSubmissionsFroProblem);
 
-router.get("/get-submissions-count/:id", authenticate, getAllTheSubmissionsForProblem);
+router.get("/get-submissions-count/:problemid", authenticate, getAllTheSubmissionsForProblem);
 
 export default router;
