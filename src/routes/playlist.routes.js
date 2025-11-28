@@ -2,7 +2,8 @@ import express from "express";
 import { authenticate } from "../middlewares/auth.middleware.js";
 import { addProblemToPlayList, 
     createPlayList, 
-    deletePlayList, getPlayAllListDetails, getPlayListDetails, removeProblemFromPlayList } from "../controllers/playlist.controller.js";
+    deletePlayList,
+     getPlayAllListDetails, getPlayListDetails, removeProblemFromPlayList } from "../controllers/playlist.controller.js";
 
 
 const router = express.Router();
