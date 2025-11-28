@@ -16,6 +16,13 @@ export const getAllSubmissions = async (req, res) => {
     }
 };
 
-export const getAllSubmissionsFroProblem = async (req, res) => { };
+export const getAllSubmissionsFroProblem = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        console.log("Fetch Submittions Error", error);
+        res.status(500).json({ error: "Failed to fetch submissions"})
+    }
+ };
 
 export const getAllTheSubmissionsForProblem = async (req, res) => { };
