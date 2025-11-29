@@ -1,7 +1,11 @@
 import { db } from "../lib/db.js";
 
 export const createPlayList = async (req, res) => { 
-    
+    try {
+        const { name, description } = req.body;
+    } catch (error) {
+        
+    }
 };
 
 export const getPlayAllListDetails = async (req, res) => { };
