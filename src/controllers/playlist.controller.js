@@ -12,11 +12,7 @@ export const createPlayList = async (req, res) => {
                 userId,
             },
         });
-        res.status(200).json({
-            success: true,
-            message: 'Playlist created successfully',
-            playList,
-        });
+        res.status(200).json({ success: true, message: 'Playlist created successfully', playList, });
     } catch (error) {
         console.error('Error creating playlist:', error);
         res.status(500).json({ error: 'Failed to create playlist (this playlist allready created)' });
@@ -38,11 +34,7 @@ export const getPlayAllListDetails = async (req, res) => {
             }
         });
 
-        res.status(200).json({
-            success: true,
-            message: 'Playlist fetched successfully',
-            playLists,
-        });
+        res.status(200).json({ success: true, message: 'Playlist fetched successfully', playLists });
     } catch (error) {
 
     }
