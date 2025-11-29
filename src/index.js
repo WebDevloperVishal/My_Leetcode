@@ -7,6 +7,7 @@ import authRouter from "./routes/auth.routes.js";
 import problemRoutes from "./routes/problem.routes.js"
 import executecodeRoutes from "./routes/executeCode.routes.js";
 import submissionsRoutes from "./routes/submission.routes.js";
+import playListroutes from "./routes/playlist.routes.js";
                                                                                                                                                                                                                                                                                                                                                                                        
 dotenv.config({ path: {debug: true} });
 
@@ -30,6 +31,7 @@ app.use("/api/v1/auth" , authRouter);
 app.use('/api/v1/problems', problemRoutes);
 app.use("/api/v1/execute-code", executecodeRoutes);
 app.use("/api/v1/submission", submissionsRoutes);
+app.use("/api/v1/playlist",playListroutes);
 
 app.listen(PORT, () =>{ 
     console.log(`Example app listening at http://localhost:${PORT}`)
