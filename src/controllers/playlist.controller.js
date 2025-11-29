@@ -1,6 +1,8 @@
 import { db } from "../lib/db.js";
 
-export const createPlayList = async (req, res) => { };
+export const createPlayList = async (req, res) => { 
+    
+};
 
 export const getPlayAllListDetails = async (req, res) => { };
 
