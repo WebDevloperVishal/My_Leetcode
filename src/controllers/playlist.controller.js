@@ -36,7 +36,8 @@ export const getPlayAllListDetails = async (req, res) => {
 
         res.status(200).json({ success: true, message: 'Playlist fetched successfully', playLists });
     } catch (error) {
-
+        console.log("Error fetching playlist" , error);
+        res.status(500).json({ error: "Failed to fetch playlist"})
     }
 };
 
