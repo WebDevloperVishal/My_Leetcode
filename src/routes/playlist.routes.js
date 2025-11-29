@@ -9,7 +9,6 @@ import {
     removeProblemFromPlayList
 } from "../controllers/playlist.controller.js";
 
-
 const router = express.Router();
 
 router.get("/", authenticate, getPlayAllListDetails);
