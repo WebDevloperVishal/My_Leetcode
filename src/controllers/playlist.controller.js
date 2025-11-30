@@ -1,71 +1,71 @@
 import { db } from "../lib/db.js";
 
 export const createPlayList = async (req, res) => {
-    try {
-        const { name, description } = req.body;
-        const userId = req.user.id;
+  try {
+    const { name, description } = req.body;
+    const userId = req.user.id;
 
-        const playList = await db.playlist.create({
-            data: {
-                name,
-                description,
-                userId,
-            },
-        });
-        res.status(200).json({ success: true, message: 'Playlist created successfully', playList, });
-    } catch (error) {
-        console.error('Error creating playlist:', error);
-        res.status(500).json({ error: 'Failed to create playlist (this playlist allready created)' });
-    }
+    const playList = await db.playlist.create({
+      data: {
+        name,
+        description,
+        userId,
+      },
+    });
+    res.status(200).json({ success: true, message: 'Playlist created successfully', playList, });
+  } catch (error) {
+    console.error('Error creating playlist:', error);
+    res.status(500).json({ error: 'Failed to create playlist (this playlist allready created)' });
+  }
 };
 
 export const getPlayAllListDetails = async (req, res) => {
-    try {
-        const playLists = await db.playlist.findMany({
-            where: {
-                userId: req.user.id,
-            },
-            include: {
-                problems: {
-                    include: {
-                        problem: true,
-                    },
-                },
-            }
-        });
+  try {
+    const playLists = await db.playlist.findMany({
+      where: {
+        userId: req.user.id,
+      },
+      include: {
+        problems: {
+          include: {
+            problem: true,
+          },
+        },
+      }
+    });
 
-        res.status(200).json({ success: true, message: 'Playlist fetched successfully', playLists });
-    } catch (error) {
-        console.log("Error fetching playlist", error);
-        res.status(500).json({ error: "Failed to fetch playlist" })
-    }
+    res.status(200).json({ success: true, message: 'Playlist fetched successfully', playLists });
+  } catch (error) {
+    console.log("Error fetching playlist", error);
+    res.status(500).json({ error: "Failed to fetch playlist" })
+  }
 };
 
 export const getPlayListDetails = async (req, res) => {
-    const { playlistId } = req.params;
+  const { playlistId } = req.params;
 
-    try {
-        const playList = await db.playlist.findUnique({
-            where: { id: playlistId, userId: req.user.id },
-            include: {
-                problem: {
-                    include: {
-                        problem: true,
-                    },
-                },
-            },
-        });
+  try {
+    const playList = await db.playlist.findUnique({
+      where: { id: playlistId, userId: req.user.id },
+      include: {
+        problems: {
+          include: {
+            problem: true,
+          },
+        },
+      },
+    });
 
-        if (!playList) {
-            return res.status(404).json({ error: "Playlist not found" });
-        }
-
-        res.status(200).json({ success: true, message: "Playlist fetched successfully", playList })
-    } catch (error) {
-        console.error('Error fetching playlist:', error);
-        res.status(500).json({ error: 'Failed to fetch playlist' });
+    if (!playList) {
+      return res.status(404).json({ error: "Playlist not found" });
     }
-};
+
+    res.status(200).json({ success: true, message: "Playlist fetched successfully", playList })
+  } catch (error) {
+    console.error('Error fetching playlist:', error);
+    res.status(500).json({ error: 'Failed to fetch playlist' });
+  }
+}
 
 export const addProblemToPlayList = async (req, res) => { };
 

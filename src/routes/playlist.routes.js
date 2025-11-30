@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.get("/", authenticate, getPlayAllListDetails);
 
-router.get("/:playlistid", authenticate, getPlayListDetails);
+router.get("/:playlistId", authenticate, getPlayListDetails);
 
 router.post("/create-playlist", authenticate, createPlayList);
 
