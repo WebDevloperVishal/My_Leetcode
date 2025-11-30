@@ -11,11 +11,11 @@ import {
 
 const router = express.Router();
 
+router.post("/create-playlist", authenticate, createPlayList);
+
 router.get("/", authenticate, getPlayAllListDetails);
 
 router.get("/:playlistId", authenticate, getPlayListDetails);
-
-router.post("/create-playlist", authenticate, createPlayList);
 
 router.post("/:playlistId/add-problem", authenticate, addProblemToPlayList);
 
