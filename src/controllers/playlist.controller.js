@@ -83,8 +83,6 @@ export const addProblemToPlayList = async (req, res) => {
         problemId,
       })),
 
-      skipDuplicates: true,
-
     });
 
     res.status(201).json({
@@ -99,9 +97,8 @@ export const addProblemToPlayList = async (req, res) => {
 
 };
 
-export const deletedPlayList = async (req, res) => {
-
-  const { playlistId } = req.params;
+export const deletePlayList = async (req, res) => {
+const { playlistId } = req.params;
 
   try {
     const deletedPlaylist = await db.playlist.delete({
@@ -122,4 +119,6 @@ export const deletedPlayList = async (req, res) => {
 
 };
 
-export const removeProblemFromPlayList = async (req, res) => { };
+export const removeProblemFromPlayList = async (req, res) => { 
+  
+};
