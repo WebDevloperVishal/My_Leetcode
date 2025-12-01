@@ -23,5 +23,4 @@ router.delete("/:playlistId", authenticate, deletePlayList);
 
 router.delete("/:playlistId/remove-problem", authenticate, removeProblemFromPlayList)
 
-
 export default router;
