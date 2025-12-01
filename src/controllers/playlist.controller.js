@@ -121,8 +121,6 @@ export const deletePlayList = async (req, res) => {
 
 export const removeProblemFromPlayList = async (req, res) => {
 
-
-
   const { playlistId } = req.params;
   const { problemIds } = req.body;
 
@@ -130,7 +128,7 @@ export const removeProblemFromPlayList = async (req, res) => {
     if (!Array.isArray(problemIds) || problemIds.length === 0) {
       return res.status(400).json({ error: 'Invalid or missing problemIds' });
     }
-    // Only delete given problemIds not all
+
 
     const deletedProblem = await db.problemInPlaylist.deleteMany({
       where: {
@@ -150,6 +148,5 @@ export const removeProblemFromPlayList = async (req, res) => {
     console.error('Error removing problem from playlist:', error.message);
     res.status(500).json({ error: 'Failed to remove problem from playlist' });
   }
-
 
 };
