@@ -69,7 +69,7 @@ export const getPlayListDetails = async (req, res) => {
 
 export const addProblemToPlayList = async (req, res) => {
   const { playlistId } = req.params;
-  const { problemIds } = req.body; 
+  const { problemIds } = req.body;
 
   console.log(problemIds);
   try {
@@ -99,28 +99,27 @@ export const addProblemToPlayList = async (req, res) => {
 
 };
 
-export const deletePlayList = async (req, res) => {
+export const deletedPlayList = async (req, res) => {
 
-const { playListId } = req.body;
+  const { playlistId } = req.params;
 
-try {
-  const deletePlayList = await db.playList.delete({
-    where:{
-      id: playListId,
-    }
-  });
+  try {
+    const deletedPlaylist = await db.playlist.delete({
+      where: {
+        id: playlistId,
+      },
+    });
 
-  res.status(200).json({
-    success: true,
-    message: "Playlist delete successfully",
-    deletePlayList,
-  });
+    res.status(200).json({
+      success: true,
+      message: 'Playlist deleted successfully',
+      deletedPlaylist,
+    });
+  } catch (error) {
+    console.error('Error deleting playlist:', error.message);
+    res.status(500).json({ error: 'Failed to delete playlist' });
+  }
 
-} catch (error) {
-  console.error("Error deleting playlist", error.message);
-  res.status(500).json({ error: "Falied to delete playlist"});
-}
-  
- };
+};
 
 export const removeProblemFromPlayList = async (req, res) => { };

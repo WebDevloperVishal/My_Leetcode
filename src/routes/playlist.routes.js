@@ -3,7 +3,7 @@ import { authenticate } from "../middlewares/auth.middleware.js";
 import {
     addProblemToPlayList,
     createPlayList,
-    deletePlayList,
+    deletedPlayList,
     getPlayAllListDetails,
     getPlayListDetails,
     removeProblemFromPlayList
@@ -19,7 +19,7 @@ router.get("/:playlistId", authenticate, getPlayListDetails);
 
 router.post("/:playlistId/add-problem", authenticate, addProblemToPlayList);
 
-router.delete("/:playlistId", authenticate, deletePlayList);
+router.delete("/:playlistId", authenticate, deletedPlayList);
 
 router.delete("/:playlistId/remove-problem", authenticate, removeProblemFromPlayList)
 
