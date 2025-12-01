@@ -92,7 +92,7 @@ export const addProblemToPlayList = async (req, res) => {
     });
   } catch (error) {
     console.error('Error adding problems to playlist:', error.message);
-    res.status(500).json({ error: 'Failed to add problems to playlist' });
+    res.status(500).json({ error: 'Failed to add problems to playlist (this problem allready add in playList)' });
   }
 
 };
