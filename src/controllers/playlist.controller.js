@@ -27,6 +27,9 @@ export const createPlayList = async (req, res) => {
   }
 };
 
+// =========================================================================== //
+
+
 // Function to get all playlists belonging to the logged-in user
 export const getPlayAllListDetails = async (req, res) => {
   try {
@@ -55,6 +58,10 @@ export const getPlayAllListDetails = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch playlist" })
   }
 };
+
+
+// =========================================================================== //
+
 
 // Function to get details of a single specific playlist
 export const getPlayListDetails = async (req, res) => {
@@ -90,6 +97,10 @@ export const getPlayListDetails = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch playlist' });
   }
 }
+
+
+// =========================================================================== //
+
 
 // Function to add one or more problems to a playlist
 export const addProblemToPlayList = async (req, res) => {
@@ -130,6 +141,10 @@ export const addProblemToPlayList = async (req, res) => {
 
 };
 
+
+// =========================================================================== //
+
+
 // Function to delete an entire playlist
 export const deletePlayList = async (req, res) => {
   // Extract playlist ID from URL parameters
@@ -157,6 +172,10 @@ export const deletePlayList = async (req, res) => {
   }
 
 };
+
+
+// =========================================================================== //
+
 
 // Function to remove one or more problems from a playlist
 export const removeProblemFromPlayList = async (req, res) => {
